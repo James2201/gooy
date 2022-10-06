@@ -36,7 +36,14 @@ function addTask() {
 }
 
 function toggleTask() {
-  console.log('Toggle Task');
+  let index = +prompt("enter number of task:");
+  let task = tasks[index];
+  if (task.completed === ""){
+    task.completed = "completed";
+  } else {
+    task.completed = ""
+  }
+  displayall();
 }
 
 function removeTask() {
@@ -64,7 +71,7 @@ function displayall(){
 
 function gettaskhtmlstr(task, i){
   return `
-    <div>
+    <div class = "${task.completed}">
       ${i}: ${task.description}
     </div>
   `
@@ -76,5 +83,5 @@ function savetasks(){
 
 function loadtasks(){
   let tasksstr = localStorage.getItem('tasks');  
-  return JSON.parse(tasksstr);   
+  return JSON.parse(tasksstr) ?? [];   
 }
