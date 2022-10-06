@@ -5,6 +5,9 @@ let goBtnEl = document.getElementById('go-btn');
 let menuEl = document.getElementById('menu');
 let tasksEl = document.getElementById('tasks');
 
+let tasks = loadtasks();
+displayall();
+
 // Go Btn - Menu Listener
 goBtnEl.addEventListener('click', goBtnHandler);
 
@@ -25,7 +28,11 @@ function goBtnHandler() {
 
 // MENU FUNCTIONS
 function addTask() {
-  console.log('Add Task');
+  let description = prompt("enter task");
+  tasks.push(newtask(description));
+  tasksEl.innerHTML = `task added: ${description}`;
+  savetasks();
+  displayall();
 }
 
 function toggleTask() {
@@ -38,4 +45,36 @@ function removeTask() {
 
 function clearAll() {
   console.log('Clear All');
+}
+
+function newtask(taskdescription){
+  return {
+    description: taskdescription,
+    completed: ''
+  };
+}
+
+function displayall(){
+  let outputstr = '';
+  for (let i = 0; i < tasks.length; i++){
+    outputstr += gettaskhtmlstr(tasks[i], i);
+  }
+  tasksEl.innerHTML = outputstr;
+}
+
+function gettaskhtmlstr(task, i){
+  return `
+    <div>
+      ${i}: ${task.description}
+    </div>
+  `
+}
+
+function savetasks(){
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function loadtasks(){
+  let tasksstr = localStorage.getItem('tasks');  
+  return JSON.parse(tasksstr);   
 }
