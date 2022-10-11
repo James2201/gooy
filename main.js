@@ -41,17 +41,27 @@ function toggleTask() {
   if (task.completed === ""){
     task.completed = "completed";
   } else {
-    task.completed = ""
+    task.completed = "";
   }
+  savetasks();
   displayall();
 }
 
 function removeTask() {
-  console.log('Remove Task');
+  let index = +prompt("enter the number of the task");
+  if (index >= 0 && index < tasks.length){
+    tasks.splice(index, 1);
+    savetasks();
+    displayall();
+  } else {
+    alert("invalid task number");
+  }
 }
 
 function clearAll() {
-  console.log('Clear All');
+  tasks = [];
+  savetasks();
+  displayall();
 }
 
 function newtask(taskdescription){
