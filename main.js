@@ -1,5 +1,4 @@
 // My Tasks Basic
-
 // HTML Elements
 let goBtnEl = document.getElementById('go-btn');
 let menuEl = document.getElementById('menu');
