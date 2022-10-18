@@ -4,7 +4,7 @@ let goBtnEl = document.getElementById('go-btn');
 let menuEl = document.getElementById('menu');
 let tasksEl = document.getElementById('tasks');
 
-let tasks = loadtasks();
+let tasks = loadcontacts();
 displayall();
 
 // Go Btn - Menu Listener
@@ -15,43 +15,44 @@ function goBtnHandler() {
   let selection = menuEl.value;
 
   if (selection === 'add') {
-    addTask();
+    addcontacts();
   } else if (selection === 'toggle') {
-    toggleTask();
+    namecontacts();
   } else if (selection === 'remove') {
-    removeTask();
+    removecontacts();
   } else if (selection === 'clear') {
     clearAll();
   }
 }
 
 // MENU FUNCTIONS
-function addTask() {
-  let description = prompt("enter task");
-  tasks.push(newtask(description));
-  tasksEl.innerHTML = `task added: ${description}`;
-  savetasks();
-  displayall();
+function addcontacts() {
+  let name = prompt("enter task");
+  let number = prompt("enter a number");
+  let email = prompt("enter thier email");
+  let contry = prompt ("engter the contry");
+  tasks.push(newtask(name + number + email + contry));
+  tasksEl.innerHTML = `task added`;
+  savecontacts();
 }
 
-function toggleTask() {
-  let index = +prompt("enter number of task:");
-  let task = tasks[index];
-  if (task.completed === ""){
-    task.completed = "completed";
-  } else {
-    task.completed = "";
+function namecontacts() {
+    let divstr = "";
+  let index = +prompt("enter name of contacts:");
+  let contacts = contacts[index];
+  for (let i = 0; i < contacts.length; i++){
+    if (contacts.name[i].includes(index.value) ){
+      divstr += `<div> ${contacts[i]}</div>`
+    }
   }
   savetasks();
-  displayall();
 }
 
-function removeTask() {
-  let index = +prompt("enter the number of the task");
-  if (index >= 0 && index < tasks.length){
-    tasks.splice(index, 1);
+function removecontacts() {
+  let index = +prompt("enter the number of the contact");
+  if (index >= 0 && index < contacts.length){
+    contacts.splice(index, 1);
     savetasks();
-    displayall();
   } else {
     alert("invalid task number");
   }
@@ -63,25 +64,27 @@ function clearAll() {
   displayall();
 }
 
-function newtask(taskdescription){
+function newtask(name, number, email, contry){
   return {
-    description: taskdescription,
-    completed: ''
+    name: name,
+    number: number,
+    email: email,
+    contry: contry,
   };
 }
 
 function displayall(){
   let outputstr = '';
-  for (let i = 0; i < tasks.length; i++){
-    outputstr += gettaskhtmlstr(tasks[i], i);
+  for (let i = 0; i < contacts.length; i++){
+    outputstr += gettaskhtmlstr(contacts[i], i);
   }
   tasksEl.innerHTML = outputstr;
 }
 
 function gettaskhtmlstr(task, i){
   return `
-    <div class = "${task.completed}">
-      ${i}: ${task.description}
+    <div>
+      ${i}: ${contacts.name + contacts.number + contacts.email + contacts.contry}
     </div>
   `
 }
