@@ -1,0 +1,19 @@
+body {
+    width: 600px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  #tasks {
+    margin-top: 40px;
+  }
+  
+  #tasks div {
+    border: 1px solid grey;
+    padding: 10px;
+    margin: 5px 0;
+  }
+  
+  .completed {
+    text-decoration: line-through;
+  }
