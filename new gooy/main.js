@@ -89,11 +89,11 @@ function gettaskhtmlstr(task, i){
   `
 }
 
-function savetasks(){
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+function savecontacts(){
+  localStorage.setItem("tasks", JSON.stringify(contacts));
 }
 
-function loadtasks(){
-  let tasksstr = localStorage.getItem('tasks');  
-  return JSON.parse(tasksstr) ?? [];   
+function loadcontacts(){
+  let contactstr = localStorage.getItem('contacts');  
+  return JSON.parse(contactstr) ?? [];   
 }
